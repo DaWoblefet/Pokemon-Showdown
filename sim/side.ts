@@ -524,6 +524,28 @@ export class Side {
 			}
 		}
 
+		// New Sleep Clause stuff
+		if (this.battle.ruleTable.has('newsleepclause')) {
+			// If current move is sleep move
+			if (move.status && move.status === 'slp') {
+
+				// If previous move clicked this turn is sleep move
+				for (const action of this.choice.actions) {
+					const prevMove = this.battle.dex.moves.get(action.moveid);
+
+					// If sleep move was not targeted at an ally
+					if (prevMove.status && prevMove.status === 'slp' && action.targetLoc && action.targetLoc > 0) {
+
+						// If the opponent has at least 2 Pokemon remaining
+						if (pokemon.side.foePokemonLeft() > 1 ) {
+							const prevName = action.pokemon?.name;
+							return this.emitChoiceError(`Can't move: ${pokemon.name} can't use ${move.name} because ${prevName} already used ${prevMove.name} at the opponent, which could possibly break new Sleep Clause name.`);
+						}
+					}
+				}
+			}
+		}
+
 		const lockedMove = pokemon.getLockedMove();
 		if (lockedMove) {
 			let lockedMoveTargetLoc = pokemon.lastMoveTargetLoc || 0;

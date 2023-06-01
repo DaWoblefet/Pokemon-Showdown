@@ -929,6 +929,23 @@ export class Pokemon {
 					target = this.battle.dex.moves.get('curse').nonGhostTarget || moveSlot.target;
 				}
 			}
+
+			// New Sleep Clause stuff
+			if (this.battle.ruleTable.has('newsleepclause')) {
+				const dexMove = this.battle.dex.moves.get(moveName);
+				if (dexMove.status && dexMove.status === 'slp') {
+					if (this.side.foePokemonLeft() > 1) {
+						for (const pokemon of this.side.foe.pokemon) {
+							if (pokemon.hp && pokemon.status === 'slp') {
+								if (!pokemon.statusState.source || !pokemon.statusState.source.isAlly(pokemon)) {
+									target = 'adjacentAlly';
+								}
+							}
+						}
+					}
+				}
+			}
+
 			let disabled = moveSlot.disabled;
 			if (this.volatiles['dynamax']) {
 				// if each of a Pokemon's base moves are disabled by one of these effects, it will Struggle

@@ -1136,6 +1136,20 @@ export const Rulesets: {[k: string]: FormatData} = {
 			}
 		},
 	},
+	newsleepclause: {
+		effectType: 'Rule',
+		name: 'New Sleep Clause',
+		desc: "Prevents players from targeting an opponent with a sleep move if they have already put one of their opponent's Pok&eacute;mon to sleep.",
+		onBegin() {
+			this.add('rule', 'New Sleep Clause Mod: Limit one foe put to sleep');
+		},
+		onValidateRule() {
+			if (!['doubles', 'triples', 'multi'].includes(this.format.gameType)) {
+				throw new Error(`The "New Sleep Clause Name" rule requires a format with ally Pokémon.`);
+			}
+		},
+		// implemented in pokemon.ts#getMoves and side.ts#chooseMove
+	},
 	stadiumsleepclause: {
 		effectType: 'Rule',
 		name: 'Stadium Sleep Clause',
