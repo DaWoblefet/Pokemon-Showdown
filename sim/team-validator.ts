@@ -2728,8 +2728,6 @@ export class TeamValidator {
 			return this.dex.species.get(species.baseSpecies);
 		} else if (species.name === 'Lycanroc-Dusk') {
 			return this.dex.species.get('Rockruff-Dusk');
-		} else if (species.name === 'Greninja-Bond') {
-			return null;
 		} else if (species.prevo) {
 			// there used to be a check for Hidden Ability here, but apparently it's unnecessary
 			// Shed Skin Pupitar can definitely evolve into Unnerve Tyranitar
@@ -2739,6 +2737,9 @@ export class TeamValidator {
 		} else if (species.changesFrom && species.baseSpecies !== 'Kyurem') {
 			// For Pokemon like Rotom and Necrozma whose movesets are extensions are their base formes
 			return this.dex.species.get(species.changesFrom);
+		} else if (this.gen >= 9 && species.inheritEggMovesFrom) {
+			// Event formes like Ursaluna-Blood-Moon and Greninja-Bond can inherit egg moves via Mirror Herb despite not evolving
+			return this.dex.species.get(species.inheritEggMovesFrom);
 		}
 		return null;
 	}

@@ -11662,6 +11662,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 40,
 		color: "Blue",
 		eggGroups: ["Undiscovered"],
+		inheritEggMovesFrom: "Froakie",
 		gen: 7,
 	},
 	greninjaash: {
@@ -16463,6 +16464,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 333,
 		color: "Brown",
 		eggGroups: ["Field"],
+		inheritEggMovesFrom: "Teddiursa",
 		gen: 9,
 	},
 	basculegion: {

@@ -143,6 +143,8 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 	readonly eggGroups: string[];
 	/** True if this species can hatch from an Egg. */
 	readonly canHatch: boolean;
+	/** Species that this Pokemon can get Egg moves from, despite not evolving into that species directly. */
+	readonly inheritEggMovesFrom: string;
 	/**
 	 * Gender. M = always male, F = always female, N = always
 	 * genderless, '' = sometimes male sometimes female.
@@ -261,6 +263,7 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 		this.nfe = data.nfe || false;
 		this.eggGroups = data.eggGroups || [];
 		this.canHatch = data.canHatch || false;
+		this.inheritEggMovesFrom = data.inheritEggMovesFrom || '';
 		this.gender = data.gender || '';
 		this.genderRatio = data.genderRatio || (this.gender === 'M' ? {M: 1, F: 0} :
 			this.gender === 'F' ? {M: 0, F: 1} :
