@@ -40,7 +40,7 @@ describe('Future Sight', function () {
 		assert(battle.log[battle.lastMoveLine + 1].startsWith('|-fail|'));
 	});
 
-	it.only(`should target particular slots in Doubles`, function () {
+	it(`should target particular slots in Doubles`, function () {
 		battle = common.createBattle({gameType: 'doubles'}, [[
 			{species: 'Wynaut', moves: ['sleeptalk', 'futuresight']},
 			{species: 'Steelix', moves: ['sleeptalk']},
